@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+import os
 import pydeep
 from os.path import abspath, isfile, isdir, join
 from os import listdir
@@ -131,7 +132,7 @@ if __name__ == "__main__":
     with tarfile.TarFile(args.output, mode='a') as mytar:
         for group in xrange(len(groups)):
             for path in groups[group]:
-                mytar.add(path, arcname=join(str(group), sha256s[path]))
+                mytar.add(path, arcname=join(str(group), str(os.path.basename(path))))
         gexf_tar_file = StringIO.StringIO()
         gexf_tar_file.write(generate_gexf(scores))
         gexf_tar_file.seek(0)
